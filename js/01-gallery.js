@@ -27,25 +27,25 @@ function render(galleryItems){
 
 render(galleryItems);
 
-
+let instance;
 
 gallery.addEventListener("click", event=>{
     event.preventDefault();
 
     if (event.target.nodeName !== "IMG") return;
 
-    const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
     `);
     
     instance.show();
 
     document.addEventListener("keydown", onKeyDown);
-
-    function onKeyDown(event){
-        if(event.code === "Escape") instance.close();
-        document.removeEventListener("keydown", onKeyDown);
-    }
 });
+
+function onKeyDown(event){
+    if(event.code === "Escape") instance.close();
+    document.removeEventListener("keydown", onKeyDown);
+}
 
 
